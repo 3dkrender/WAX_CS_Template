@@ -1,0 +1,46 @@
+{
+  "name": "wax-react-client-template",
+  "private": true,
+  "author": {
+    "name": "Marcos DK",
+    "organization": "3DK Render",
+    "email": "info@3dkrender.com",
+    "url": "https://3dkrender.com",
+    "github": "https://github.com/3dkrender",
+    "twitter": "https://twitter.com/MarcoS3DK"
+  },
+  "version": "0.0.0",
+  "description": "A client web template with React, Redux, UAL, NextUI, Typescript, Vite",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev:tlocal": "vite --open --mode testnet-local",
+    "dev:testnet": "vite --open --mode testnet-production",
+    "start:mlocal": "vite preview --mode production-local",
+    "start:main": "vite preview --mode production",
+    "build:mainnet": "tsc && vite build --mode production",
+    "build:testnet": "tsc && vite build --mode testnet-production",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@eosdacio/ual-wax": "^1.9.0",
+    "@nextui-org/react": "^1.0.0-beta.13",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@types/lodash": "^4.14.195",
+    "axios": "^1.4.0",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.0",
+    "react-router-dom": "^6.12.1",
+    "ual-anchor": "^1.3.0",
+    "ual-plainjs-renderer": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^4.0.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9"
+  }
+}
