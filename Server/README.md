@@ -57,6 +57,10 @@ Create a ```.env-cmdrc.json``` file in the root directory and add this json obje
 
 *The WAXKEY in the example is a fake key. You must use your own key.*
 
+# IMPORTANT
+
+The project includes environment configuration files for educational purposes. Make sure that these files are not shared in your Github repository, especially if you publish your project in a public repository.
+
 ## Usage
 
 Read the docs for some information: [Documentation](./docs/README.md)
