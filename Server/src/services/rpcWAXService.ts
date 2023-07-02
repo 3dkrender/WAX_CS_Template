@@ -62,6 +62,28 @@ export class RPCWAXService {
       logger.error(error);
     }
   }
+  
+  /**
+   * Get the content of a table in the blockchain
+   * @param code: {String} contract account name
+   * @param scope: {String} table scope 
+   * @param table: {String} table name
+   * @returns: Promise: {Array} rows
+   */
+  public async getTableRows(code: string, scope: string, table: string) {
+    try {
+      const data = await this.rpc.get_table_rows({
+        json: true,
+        code,
+        scope,
+        table,
+        limit: 100,
+      });
+      return data.rows;
+    } catch (error) {
+      logger.error(error);
+    }
+  }
 }
 
 export const rpcWAXService = new RPCWAXService();

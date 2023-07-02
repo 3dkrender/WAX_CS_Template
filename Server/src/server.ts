@@ -30,7 +30,10 @@ app.use(morgan('combined'));
 /**
  * Middleware Routes
  */
+
+// WAX API: http://<host>:<port>/api/<method>
 app.use("/api", rtGetWAXApi);
+// MongoDB API: http://<host>:<port>/db/<method>
 app.use("/db", rtGetMongoApi);
 
 /**
