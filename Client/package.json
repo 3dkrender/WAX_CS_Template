@@ -16,7 +16,7 @@
   "scripts": {
     "dev:tlocal": "vite --open --mode testnet-local",
     "dev:testnet": "vite --open --mode testnet-production",
-    "start:mlocal": "vite preview --mode production-local",
+    "start:mlocal": "vite --open --mode production-local",
     "start:main": "vite preview --mode production",
     "build:mainnet": "tsc && vite build --mode production",
     "build:testnet": "tsc && vite build --mode testnet-production",
