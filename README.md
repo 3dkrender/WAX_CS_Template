@@ -1,5 +1,5 @@
 ![3DK Logo](https://3dkrender.com/wp-content/uploads/2021/05/3DK_LOGO_400x120.png)
-# Client Server Template (for WAX blockchain dApps)
+# Client Server Template (for WAX blockchain developers)
 
 ## Introduction
 
