@@ -48,7 +48,7 @@ Create a ```.env-cmdrc.json``` file in the root directory and add this json obje
     "CHAIN_ID": "106a8d3c7c2b8ce8a8b4217d6e2df6e7888ec5f6d9b6c4d3a1a3f2b5bea6c2aa",
     "RPC": "https://apiwax.3dkrender.com",
     "WAXKEY": "PVT_K1_PKAAAAAAAAAAAAAAAAAAAAAA",
-    "PORT": 3000,
+    "PORT": 3005,
     "MONGO_DBNAME": "dbname",
     "MONGO_URI": "mongodb://localhost:9857/"
   }  
