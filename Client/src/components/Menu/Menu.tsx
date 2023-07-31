@@ -67,44 +67,48 @@ export const Menu = () => {
               />
             </Link>
             <Spacer y={0.5} />
-            <Text size='20px' b>
-              My APP Template
-            </Text>
-            <Spacer y={0.5} />
-            <div className="px-2">
-              <Badge size='xs' color='warning' disableOutline>
-                Beta
-              </Badge>
-            </div>
+            <Grid.Container gap={0.5} alignContent='center'>
+              <Text size='20px' b>
+                {import.meta.env.VITE_APP_NAME}
+              </Text>
+              <Spacer y={0.5} />
+              <div className="px-2">
+                <Badge size='xs' color='warning' disableOutline>
+                  Beta
+                </Badge>
+              </div>
+            </Grid.Container>
           </Grid>
           <Grid xs={12} md={6} justify="flex-end">
             {
               DinamicRoutes.map((route, index) => {
-                if(!route.showInMenu)return null;
-                if(route.isPrivate && !isLogged)return null;
+                if (!route.showInMenu) return null;
+                if (route.isPrivate && !isLogged) return null;
                 return (
-                  <Link key={index} to={route.path} style={{ width: "auto" }}>
-                    <Text size='h5' b>
-                      {route.title}
-                    </Text>
-                  </Link>
+                  <Grid.Container gap={0.5} alignContent='center'>
+                    <Link key={index} to={route.path} style={{ width: "auto" }}>
+                      <Text size='h5' b>
+                        {route.title}
+                      </Text>
+                    </Link>
+                  </Grid.Container>
                 )
               })
             }
             {
               !isLogged || !UserService.isAuth()
-              ? (
-                <Container css={{ width: "auto", margin: "auto 0 auto 0" }}>
-                  <LoginButton title={"Connect wallet"} ></LoginButton>
-                </Container>
-              )
-              : (
-                <UserMenu
-                  name={userName}
-                  balance={balance}
-                  isLogged={isLogged}
-                ></UserMenu>
-              )
+                ? (
+                  <Container css={{ width: "auto", margin: "auto 0 auto 0" }}>
+                    <LoginButton title={"Connect wallet"} ></LoginButton>
+                  </Container>
+                )
+                : (
+                  <UserMenu
+                    name={userName}
+                    balance={balance}
+                    isLogged={isLogged}
+                  ></UserMenu>
+                )
             }
           </Grid>
         </Grid.Container>
