@@ -1,4 +1,4 @@
-import { Container, Dropdown, Text } from "@nextui-org/react";
+import { Button, Dropdown, DropdownTrigger, DropdownItem, DropdownMenu } from "@nextui-org/react";
 import UserService from "../../services/UserService";
 import { useNavigate } from "react-router-dom";
 
@@ -13,19 +13,25 @@ import { useNavigate } from "react-router-dom";
  */
 export const UserMenu = ({
   name,
-  balance,
   isLogged,
 }: {
   name: string;
-  balance: number;
   isLogged: boolean;
 }) => {
   //   const { name, balance, isLogged } = useSelector((store: any) => store.user);
   const navigate = useNavigate();
+  
   const logOutUser = (event: any) => {
     if (event === "logout") {
       if (isLogged) {
         UserService.logout();
+        const localData = localStorage;
+        for (let i = 0; i < localData.length; i++) {
+          const key = localData.key(i);
+          if (key?.includes('ual-') || key?.includes('anchor-')) {
+            localStorage.removeItem(key);
+          }
+        }
         navigate("/")
       }
     }
@@ -34,25 +40,21 @@ export const UserMenu = ({
     }
   };
 
+
   return (
-    <Container css={{ width: "auto", margin: "auto 0 auto 0" }}>
-      <Dropdown placement="bottom-left">
-        <Dropdown.Button light>
-          <Container css={{ width: "min-content" }}>
-            <Text>{name}</Text>
-            <Text>{balance}</Text>
-          </Container>
-        </Dropdown.Button>
-        <Dropdown.Menu
-          aria-label="Static Actions"
-          onAction={(e) => logOutUser(e)}
-        >
-          <Dropdown.Item key="user-tokens">View tokens</Dropdown.Item>
-          <Dropdown.Item key="logout" withDivider color="error">
-            Log out
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    </Container>
-  );
+    <Dropdown aria-label="user-menu" >
+      <DropdownTrigger aria-label="access-user-menu">
+        <Button variant="bordered" aria-label="User options menu">
+          <span className="text-white">{name}</span>
+          <svg className="w-[15px] h-[15px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 8">
+            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1" />
+          </svg>
+        </Button>
+      </DropdownTrigger>
+      <DropdownMenu aria-label="user-menu-options">
+        <DropdownItem aria-label="user-tokens" onPress={() => navigate('/user-tokens')} className="text-black " >View tokens</DropdownItem>
+        <DropdownItem aria-label="logout" onPress={() => logOutUser("logout")} className="text-danger" >Log out</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  )
 };

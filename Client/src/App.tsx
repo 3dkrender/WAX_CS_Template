@@ -3,15 +3,16 @@ import { Provider } from "react-redux";
 import { store } from './redux/store';
 import { AppRoutes } from "./router/AppRoutes";
 
+
 /**
  * Render the app and routes
  */
 function App() {
   return (
     <div>
-      <Suspense fallback={<>Cargando</>}>
+      <Suspense fallback={<>Loading...</>}>
         <Provider store={store}>
-          <AppRoutes />
+            <AppRoutes />
         </Provider>
       </Suspense>
     </div>

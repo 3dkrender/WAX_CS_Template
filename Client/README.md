@@ -36,11 +36,9 @@ VITE_EXPLORER= # WAX explorer URL (if you want to show transaction links)
 
 *See some samples in the env folder*
 
-You can uncomment the env line in ```.gitignore``` to avoid pushing your .env files to your repository. It is included in this repo for learning purposes.
-
 ## React UI
 
-This template uses the [React NextUI](https://https://nextui.org/) library for the UI. Feel free to use any other UI library.
+This template uses the [React NextUI V2](https://https://nextui.org/) library for the UI. Feel free to use any other UI library.
 
 ## Usage
 
@@ -72,17 +70,34 @@ The client utilizes the axios library to make server requests from within the co
 
 ### Example Server Request
 
+From component: 
+
 ```javascript
-useEffect(() => {
-  axios
-    .get(import.meta.env.VITE_SERVER + "api/getinfo")
-    .then((res: any) => {
-      setData(res.data);
-    })
-    .catch((err: any) => {
-      console.log(err);
-    });
-}, []);
+const [info, setInfo] = useState(null);
+  useEffect(() => {
+    ctGetInfo()
+      .then((res: any) => {
+        if (res) {
+          setInfo(res);
+        }
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  }, [])
+```
+
+Controller (ctGetInfo):
+
+```javascript
+export const ctGetInfo = async () => {
+  try {
+    const res = await axios.get(import.meta.env.VITE_SERVER + "api/getinfo");
+    return res.data['info'];
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 ```
 
 This example demonstrates a server request using axios within the `useEffect` hook. It fetches data from the specified API endpoint and stores the response data in the component's state variable.
@@ -116,3 +131,9 @@ npm run build:testnet
 # For mainnet
 npm run build:main
 ```
+
+## Version: 0.2.0
+- NextUI updated to v2.0.0 (All UI refactored)
+  - Now includes TailwindCSS
+- Improved server calls
+

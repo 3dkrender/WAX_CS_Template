@@ -5,14 +5,11 @@ import axios from "axios";
  * @returns Info of the blockchain
  */
 export const ctGetInfo = async () => {
-  axios
-    .get(import.meta.env.VITE_SERVER + "api/getinfo")
-    .then((res: any) => {
-      console.log(res.data);
-      return res.data;
-    })
-    .catch((err: any) => {
-      console.log(err);
-      return null;
-    });
+  try {
+    const res = await axios.get(import.meta.env.VITE_SERVER + "api/getinfo");
+    return res.data['info'];
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 };

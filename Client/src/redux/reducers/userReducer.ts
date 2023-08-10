@@ -13,8 +13,8 @@ const user:any = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setPlayerData: (state, action) => action.payload,
-    setPlayerLogout: (state, action) => action.payload,
+    setPlayerData: (_state, action) => action.payload,
+    setPlayerLogout: (_state, action) => action.payload,
     setPlayerBalance: (state, action) => ({
       ...state,
       balance: action.payload,
