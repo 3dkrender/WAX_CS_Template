@@ -8,17 +8,17 @@ Create a backend server for a WAX blockchain dApp using Node, Express, and Mongo
 
 Created by 3DK Render
 
-## Installation
+## Installation (Server)
 
 Clone the repo and install dependencies
-  
-  ```bash
-  git clone https://github.com/3dkrender/WAX-NST.git
-  cd WAX-NST
-  npm install
-  ```
 
-This template works together with the [WAX-ReactClientTemplate](https://github.com/3dkrender/WAX-RCT). You must clone both repos and install dependencies in each one.
+```bash
+git clone https://github.com/3dkrender/WAX_CS_Template.git
+cd WAX_CS_Template/Server
+npm install
+```
+
+This template works together with the [WAX-ReactClientTemplate](https://github.com/3dkrender/WAX_CS_Template/tree/main/Client). You must clone both repos and install dependencies in each one.
 
 - Client and server must be running at the same time.
 - Client and server must be running on different ports.
@@ -26,11 +26,11 @@ This template works together with the [WAX-ReactClientTemplate](https://github.c
 
 ## Environment Variables
 
-Create a ```.env-cmdrc.json``` file in the root directory and add this json object with your own values:
+Create a `.env-cmdrc.json` file in the root directory and add this json object with your own values:
 
-*Note: WAXKEY is only required if you are using the WAX blockchain to put transactions on the blockchain. If you are only using the server to read blokchain and/or store data in a database, you can leave it out.*
+_Note: WAXKEY is only required if you are using the WAX blockchain to put transactions on the blockchain. If you are only using the server to read blokchain and/or store data in a database, you can leave it out._
 
-*Note: This template is valid for both the WAX mainnet and testnet. You can add more environments if you want to use other Antelope chains.*
+_Note: This template is valid for both the WAX mainnet and testnet. You can add more environments if you want to use other Antelope chains._
 
 ```json
 {
@@ -51,11 +51,11 @@ Create a ```.env-cmdrc.json``` file in the root directory and add this json obje
     "PORT": 3005,
     "MONGO_DBNAME": "dbname",
     "MONGO_URI": "mongodb://localhost:9857/"
-  }  
+  }
 }
 ```
 
-*The WAXKEY in the example is a fake key. You must use your own key.*
+_The WAXKEY in the example is a fake key. You must use your own key._
 
 # IMPORTANT
 
@@ -78,5 +78,3 @@ npm run dev
 ```bash
 npm run start
 ```
-
-

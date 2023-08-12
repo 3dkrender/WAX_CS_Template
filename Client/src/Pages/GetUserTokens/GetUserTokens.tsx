@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { TTokens } from "../../types/TTokens";
 import { Card, CardBody, Spinner, Tooltip } from "@nextui-org/react";
 import { ctGetUserTokens } from "../../Controllers/ctGetUserTokens";
+import { sessionKit } from "../../components/Menu/Menu";
 
 /**
  * Call the server to get the tokens owned by the user
@@ -10,16 +10,20 @@ import { ctGetUserTokens } from "../../Controllers/ctGetUserTokens";
  */
 export const GetUserTokens = () => {
   const [tokens, setTokens] = useState<TTokens>([]);
-  const { userName } = useSelector((store: any) => store.user);
 
   useEffect(() => {
-    ctGetUserTokens(userName)
-      .then((res: any) => {
-        setTokens(res);
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
+    sessionKit.getSessions().then((sessions) => {
+      if (sessions.length) {
+        const userName = String(sessions[0].actor);
+        ctGetUserTokens(userName)
+          .then((res: any) => {
+            setTokens(res);
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
+      }
+    });
   }, [])
 
   return (

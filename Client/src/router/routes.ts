@@ -4,7 +4,8 @@ import { TRoutes } from "../types/TRoutes";
 import {
   Landing,
   GetInfo,
-  GetUserTokens
+  GetUserTokens,
+  PushTransaction
 } from "../Pages/";
 
 // Export the routes. See TRoutes for more details
@@ -32,6 +33,14 @@ export const DinamicRoutes = [
     exact: true,
     isPrivate: true,
     showInMenu: false
+  },
+  {
+    path: "/transaction",
+    title: "Transaction Page",
+    component: PushTransaction,
+    exact: true,
+    isPrivate: true,
+    showInMenu: true
   },
   {
     path: "*",

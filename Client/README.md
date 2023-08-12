@@ -2,21 +2,21 @@
 # React Client Template (for WAX blockchain dApps)
 
 ## Description
-Create a frontend client for WAX blockchain dApp using React and redux.
+Create a frontend client for WAX blockchain dApp using Vite, React and NextUI.
 
 Created by 3DK Render
 
-## Installation
+## Installation (Client)
 
 Clone the repo and install dependencies
   
   ```bash
-  git clone https://github.com/3dkrender/WAX-RCT.git
-  cd WAX-RCT
-  npm install
+  git clone https://github.com/3dkrender/WAX_CS_Template.git
+  cd WAX_CS_Template/Client
+  npi install
   ```
 
-This template works together with the [WAX-NodeServerTemplate](https://github.com/3dkrender/WAX-NST) template. You must have the server running in order to use this template.
+This template works together with the [WAX-NodeServerTemplate](https://github.com/3dkrender/WAX_CS_Template/tree/main/Server) template. You must have the server running in order to use this template.
 
 - Client and server must be running at the same time.
 - Client and server must be running in different ports.
@@ -137,3 +137,7 @@ npm run build:main
   - Now includes TailwindCSS
 - Improved server calls
 
+## Version: 0.3.0
+- Updated to manage sessions through [Wharf](https://wharfkit.com/)
+- Added function to push transactions to the blockchain
+- Updated React-Router to V6 (new routes syntax)
