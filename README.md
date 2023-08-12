@@ -30,7 +30,7 @@ Let's build a decentralized future on WAX Blockchain!
 ## Description
 
 - Server side: Create a backend server for a WAX blockchain dApp using Node, Express, and MongoDB.
-- Client side: Create a frontend client for WAX blockchain dApp using React and redux.
+- Client side: Create a frontend client for WAX blockchain dApp using Vite, React and NextUI.
 
 ## Installation
 
