@@ -85,5 +85,5 @@ For this reason it is necessary for the developer to have knowledge in Typescrip
 
 ## Author
 
-- [@3dkrender](https://www.github.com/3dkrender)
+- [Github](https://www.github.com/3dkrender)
 - [Discord](https://discord.gg/3dkrender)
