@@ -42,11 +42,13 @@ This template uses the [React NextUI V2](https://https://nextui.org/) library fo
 
 ## Usage
 
+## Session Management
+
+The client uses the WharfKit library for session management. The session is stored in the browser's local storage. The session is created when the user logs in and destroyed when the user logs out.
+
 ## Client Connection
 
-The client uses the ual-reactjs-renderer library to connect to the WAX blockchain. This library handles the blockchain connection and provides user account data.
-
-The user account data, as well as authentication status, are stored in the Redux store. The `useSelector` hook from react-redux is used to access this data.
+The client connects to the server using the axios library. The server URL is specified in the environment variables.
 
 ## Landing Page and Login
 
