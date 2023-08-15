@@ -8,12 +8,12 @@ import Footer from "../../components/Footer/Footer";
 export const Landing = () => {
  
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Menu />
-      <div className="min-h-[500px]" >
+      <main className="flex-grow max-w-7xl m-auto" >
         <Outlet />
-      </div>
+      </main>
       <Footer />
-    </>
+    </div>
   )
 };
