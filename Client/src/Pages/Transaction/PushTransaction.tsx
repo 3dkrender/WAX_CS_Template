@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button, Input } from '@nextui-org/react';
 import { InitTransaction } from '../../services/InitTransaction';
-import { sessionKit } from "../../components/Menu/Menu";
+import { sessionKit } from "../../App";
 
 export const PushTransaction = () => {
   const [amount, setAmount] = useState(0.0001);

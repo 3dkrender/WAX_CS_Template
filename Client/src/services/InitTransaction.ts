@@ -1,4 +1,4 @@
-import { sessionKit } from "../components/Menu/Menu";
+import { sessionKit } from "../App";
 
 
 // TODO: Don't forget to change "broadcast: true" when you are ready to push the transaction to the blockchain

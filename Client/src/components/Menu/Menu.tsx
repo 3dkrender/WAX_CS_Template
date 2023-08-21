@@ -5,25 +5,10 @@ import {
   DropdownItem, DropdownMenu, DropdownTrigger, Dropdown
 } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
-import { Chains, Session, SessionKit } from '@wharfkit/session'
-import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor'
-import { WalletPluginCloudWallet } from '@wharfkit/wallet-plugin-cloudwallet'
-import WebRenderer from '@wharfkit/web-renderer'
+import { Session } from '@wharfkit/session'
 import { DinamicRoutes } from "../../router/routes";
 
-const walletPlugins = [];
-walletPlugins.push(new WalletPluginAnchor());
-
-if (import.meta.env.VITE_CHAIN === 'mainnet') {
-  walletPlugins.push(new WalletPluginCloudWallet());
-}
-
-export const sessionKit = new SessionKit({
-  appName: import.meta.env.VITE_SITE_TITLE,
-  chains: [Chains.WAX],
-  ui: new WebRenderer(),
-  walletPlugins,
-})
+import { sessionKit } from "../../App";
 
 /**
  * Draw the menu

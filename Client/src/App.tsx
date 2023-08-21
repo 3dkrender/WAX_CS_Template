@@ -6,7 +6,33 @@ import { Landing } from "../src/Pages/";
 import ErrorPage from "../src/Pages/ErrorPage";
 import { MainPage } from "../src/Pages/Landing/main";
 
+import { SessionKit } from '@wharfkit/session'
+import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor'
+import { WalletPluginCloudWallet } from '@wharfkit/wallet-plugin-cloudwallet'
+import WebRenderer from '@wharfkit/web-renderer'
+
 import "./App.css";
+
+const chains = [
+  {
+    id: import.meta.env.VITE_CHAINID,
+    url: import.meta.env.VITE_RPC,
+  }
+];
+
+const walletPlugins = [];
+walletPlugins.push(new WalletPluginAnchor());
+if (import.meta.env.VITE_CHAIN === 'mainnet') {
+  walletPlugins.push(new WalletPluginCloudWallet());
+}
+
+export const sessionKit = new SessionKit({
+  appName: import.meta.env.VITE_SITE_TITLE,
+  chains,
+  ui: new WebRenderer(),
+  walletPlugins,
+})
+
 
 const router = createBrowserRouter([
   {
