@@ -35,6 +35,10 @@ export const Menu = () => {
     }
   };
 
+  const handleMenuClose = () => {
+    setIsMenuOpen(false);
+  };
+
   const logout = async () => {
     console.log('logout');
     sessionKit.logout()
@@ -43,44 +47,39 @@ export const Menu = () => {
   }
 
   return (
-    <Navbar
-      onMenuOpenChange={setIsMenuOpen}
-    >
+    <Navbar onMenuOpenChange={setIsMenuOpen} className="sm:py-1">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
-
         />
         <NavbarBrand key={'banner'}>
-          <div className="my-2 flex flex-row items-center">
+          <div className="my-1 flex flex-row items-center">
             <Link to={"/"} style={{ width: "auto" }} key={'image_logo'}>
               <Image
-                width={60}
-                height={60}
+                width={30}
+                height={30}
                 src={"/assets/logo.png"}
                 alt={"My APP Logo"}
                 className="logo"
               />
             </Link>
-            <Spacer y={0.5} />
+            <Spacer y={1} />
             <div className="hidden sm:flex flex-col">
-              <Badge size='sm' color='warning' content="Alpha" disableOutline
-              >
-                <p className="text-xl font-bold text-white">{import.meta.env.VITE_APP_NAME}</p>
+              <Badge size='sm' color='warning' content="Alpha" disableOutline>
+                <p className="text-lg font-bold text-white">{import.meta.env.VITE_APP_NAME}</p>
               </Badge>
             </div>
           </div>
         </NavbarBrand>
       </NavbarContent>
-      <Divider orientation="vertical" />
       <NavbarMenu>
         {
           DinamicRoutes.map((route, index) => {
             if (!route.showInMenu) return null;
             if (route.isPrivate && !session) return null;
             return (
-              <NavbarMenuItem key={index}>
+              <NavbarMenuItem key={index} onClick={handleMenuClose} >
                 <Link
                   to={route.path} aria-label={`go to ${route.title}`}>
                   <span className="text-white">{route.title}</span>
@@ -96,8 +95,8 @@ export const Menu = () => {
             if (!route.showInMenu) return null;
             if (route.isPrivate && !session) return null;
             return (
-              <React.Fragment key={index}>
-                <NavbarItem key={index}>
+              <React.Fragment key={index} >
+                <NavbarItem key={index} onClick={handleMenuClose} >
                   <Link
                     to={route.path}
                     aria-label={`go to ${route.title}`}
@@ -115,13 +114,14 @@ export const Menu = () => {
       <NavbarContent justify="end" key={'user'} >
         {
           !session
-            ? <Button onPress={login}>
+            ? <Button onPress={login} className="sm:text-xs py-1 sm:py-2">
               Login
-              <svg className="w-[15px] h-[15px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+              <svg className="w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13" />
               </svg>
             </Button>
-            : <Dropdown aria-label="user-menu" >
+            :
+            <Dropdown aria-label="user-menu" >
               <DropdownTrigger aria-label="access-user-menu">
                 <Button variant="bordered" aria-label="User options menu">
                   <span className="text-white">{String(session.actor)}</span>
