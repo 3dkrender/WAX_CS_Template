@@ -29,6 +29,7 @@
     "@wharfkit/session": "^1.0.0",
     "@wharfkit/wallet-plugin-anchor": "^1.0.0",
     "@wharfkit/wallet-plugin-cloudwallet": "^1.0.0",
+    "@wharfkit/wallet-plugin-wombat": "^1.1.0",
     "@wharfkit/web-renderer": "^1.0.0",
     "axios": "^1.4.0",
     "framer-motion": "^10.15.0",

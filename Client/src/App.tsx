@@ -9,6 +9,7 @@ import { MainPage } from "../src/Pages/Landing/main";
 import { SessionKit } from '@wharfkit/session'
 import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor'
 import { WalletPluginCloudWallet } from '@wharfkit/wallet-plugin-cloudwallet'
+import { WalletPluginWombat } from "@wharfkit/wallet-plugin-wombat";
 import WebRenderer from '@wharfkit/web-renderer'
 
 import "./App.css";
@@ -23,6 +24,7 @@ const chains = [
 const walletPlugins = [];
 walletPlugins.push(new WalletPluginAnchor());
 if (import.meta.env.VITE_CHAIN === 'mainnet') {
+  walletPlugins.push(new WalletPluginWombat());
   walletPlugins.push(new WalletPluginCloudWallet());
 }
 
