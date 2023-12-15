@@ -65,6 +65,10 @@ npm install
 
 See documentation for each part of this project to learn how to use it.
 
+### Version 0.0.5
+
+- Added support for Wombat WAX Wallet
+
 ## Disclaimer
 
 This template is provided as is, without any warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement.
@@ -86,3 +90,4 @@ For this reason it is necessary for the developer to have knowledge in Typescrip
 
 - [Github](https://www.github.com/3dkrender)
 - [Discord](https://discord.gg/3dkrender)
+

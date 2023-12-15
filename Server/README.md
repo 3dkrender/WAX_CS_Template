@@ -78,7 +78,3 @@ npm run dev
 ```bash
 npm run start
 ```
-
-### Version 0.0.5
-
-- Added support for Wombat WAX Wallet
