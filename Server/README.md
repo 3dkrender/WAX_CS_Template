@@ -39,6 +39,7 @@ _Note: This template is valid for both the WAX mainnet and testnet. You can add 
     "CHAIN_ID": "1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4",
     "RPC": "http://tapiwax.3dkrender.com",
     "WAXKEY": "PVT_K1_PKAAAAAAAAAAAAAAAAAAAAAA",
+    "ACCOUNT": "accountname",
     "PORT": 3000,
     "MONGO_DBNAME": "dbname",
     "MONGO_URI": "mongodb://localhost:9857/"
@@ -48,6 +49,7 @@ _Note: This template is valid for both the WAX mainnet and testnet. You can add 
     "CHAIN_ID": "106a8d3c7c2b8ce8a8b4217d6e2df6e7888ec5f6d9b6c4d3a1a3f2b5bea6c2aa",
     "RPC": "https://apiwax.3dkrender.com",
     "WAXKEY": "PVT_K1_PKAAAAAAAAAAAAAAAAAAAAAA",
+    "ACCOUNT": "accountname",
     "PORT": 3005,
     "MONGO_DBNAME": "dbname",
     "MONGO_URI": "mongodb://localhost:9857/"
@@ -78,3 +80,10 @@ npm run dev
 ```bash
 npm run start
 ```
+
+## Versioning
+
+### v0.2.0
+
+- Updated to Wharfkit for session management and authentication (https://wharfkit.com/). Enfjs is now deprecated.
+- Added sample function to push transactions to the blockchain

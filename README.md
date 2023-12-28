@@ -65,9 +65,6 @@ npm install
 
 See documentation for each part of this project to learn how to use it.
 
-### Version 0.0.5
-
-- Added support for Wombat WAX Wallet
 
 ## Disclaimer
 

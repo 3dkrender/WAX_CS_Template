@@ -143,3 +143,7 @@ npm run build:main
 - Updated to manage sessions through [Wharf](https://wharfkit.com/)
 - Added function to push transactions to the blockchain
 - Updated React-Router to V6 (new routes syntax)
+
+### Version 0.4.0
+
+- Added support for Wombat WAX Wallet
