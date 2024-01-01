@@ -2,10 +2,10 @@ import React, { useEffect, Dispatch, SetStateAction, useState } from "react";
 import {
   Badge, Divider, Image, Spacer, Button,
   Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle,
-  DropdownItem, DropdownMenu, DropdownTrigger, Dropdown
+  DropdownItem, DropdownMenu, DropdownTrigger, Dropdown, DropdownSection
 } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
-import { Session } from '@wharfkit/session'
+import { SerializedSession, Session } from '@wharfkit/session'
 import { DinamicRoutes } from "../../router/routes";
 
 import { sessionKit } from "../../App";
@@ -17,8 +17,20 @@ import { sessionKit } from "../../App";
 export const Menu = () => {
   // get user data from redux
   const [isMenuOpen, setIsMenuOpen] = React.useState<boolean | undefined>(false);
-  const [session, setSession]: [Session | undefined, Dispatch<SetStateAction<Session | undefined>>] = useState<Session | undefined>(undefined);
+  const [session, setSession] = useState<Session | undefined>(undefined);
+  const [sessions, setSessions] = useState<SerializedSession[]>([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    sessionKit.getSessions().then((globalSessions: SerializedSession[] | undefined) => {
+      if (globalSessions) {
+        let thisChainSessions = globalSessions.filter((session: SerializedSession) => session.chain === import.meta.env.VITE_CHAINID);
+        setSessions(thisChainSessions);
+      } else {
+        setSessions([]);
+      }
+    });
+  }, [session]);
 
   useEffect(() => {
     sessionKit.restore().then((session: Session | undefined) => {
@@ -35,16 +47,24 @@ export const Menu = () => {
     }
   };
 
-  const handleMenuClose = () => {
-    setIsMenuOpen(false);
-  };
-
   const logout = async () => {
     console.log('logout');
     sessionKit.logout()
     setSession(undefined);
     navigate('/');
   }
+
+  const restoreSession = async (session: SerializedSession) => {
+    sessionKit.restore(session).then((session: Session | undefined) => {
+      if (session) {
+        setSession(session);
+      }
+    });
+  }
+
+  const handleMenuClose = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} className="sm:py-1">
@@ -113,28 +133,63 @@ export const Menu = () => {
       </NavbarContent>
       <NavbarContent justify="end" key={'user'} >
         {
-          !session
-            ? <Button onPress={login} className="sm:text-xs py-1 sm:py-2">
-              Login
-              <svg className="w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13" />
-              </svg>
-            </Button>
-            :
-            <Dropdown aria-label="user-menu" >
-              <DropdownTrigger aria-label="access-user-menu">
-                <Button variant="bordered" aria-label="User options menu">
-                  <span className="text-white">{String(session.actor)}</span>
-                  <svg className="w-[15px] h-[15px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 8">
-                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1" />
-                  </svg>
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu aria-label="user-menu-options">
+          !session &&
+          <Button onPress={login} className="sm:text-xs py-1 sm:py-2">
+            Login
+            <svg className="w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13" />
+            </svg>
+          </Button>
+        }
+        {
+          session &&
+          <Dropdown aria-label="user-menu" >
+            <DropdownTrigger aria-label="access-user-menu">
+              <Button variant="bordered" aria-label="User options menu">
+                <span className="text-white">{String(session.actor)}</span>
+                <svg className="w-[15px] h-[15px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 8">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1" />
+                </svg>
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu aria-label="user-menu-options">
+            <DropdownSection
+                aria-label="user-menu-tools-section"
+                title=''
+                showDivider
+              >
                 <DropdownItem aria-label="user-tokens" onPress={() => navigate('/user-tokens')} className="text-black " >View tokens</DropdownItem>
-                <DropdownItem aria-label="logout" onPress={logout} className="text-danger" >Log out</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+              </DropdownSection>
+              <DropdownSection
+                aria-label="user-menu-sessions-section"
+                title='Switch Session'
+                showDivider
+              >
+                {
+                  sessions.map((session: SerializedSession, index: number) => {
+                    return (
+                      <DropdownItem aria-label="session" key={index} onPress={() => restoreSession(session)}>
+                        <div className="flex flex-row items-center">
+                          {String(session.actor)}
+                          <img className="w-[20px] h-[20px] ml-[10px]" src={`/assets/${session.walletPlugin.id}.png`} alt={session.walletPlugin.id} />
+                        </div>
+                      </DropdownItem>
+                    )
+                  })
+                }
+              </DropdownSection>
+              <DropdownSection
+                aria-label="user-menu-options-section"
+                title=''
+                showDivider
+              >
+                <DropdownItem aria-label="options" onPress={login}>
+                  Add new session
+                </DropdownItem>
+              </DropdownSection>
+              <DropdownItem aria-label="logout" onPress={logout} className="text-danger" >Log out</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         }
       </NavbarContent>
     </Navbar>

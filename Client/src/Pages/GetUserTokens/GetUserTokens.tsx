@@ -3,25 +3,28 @@ import { TTokens } from "../../types/TTokens";
 import { Card, CardBody, Spinner, Tooltip } from "@nextui-org/react";
 import { ctGetUserTokens } from "../../Controllers/ctGetUserTokens";
 import { sessionKit } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Call the server to get the tokens owned by the user
  * @returns Render the tokens owned by the user
  */
 export const GetUserTokens = () => {
+  const navitagate = useNavigate();
   const [tokens, setTokens] = useState<TTokens>([]);
 
   useEffect(() => {
-    sessionKit.getSessions().then((sessions) => {
-      if (sessions.length) {
-        const userName = String(sessions[0].actor);
-        ctGetUserTokens(userName)
-          .then((res: any) => {
-            setTokens(res);
-          })
-          .catch((err: any) => {
-            console.log(err);
-          });
+    sessionKit.restore().then((session) => {
+      if (session) {
+        ctGetUserTokens(String(session.actor))
+        .then((res: any) => {
+          setTokens(res);
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+      } else {
+        navitagate('/');
       }
     });
   }, [])

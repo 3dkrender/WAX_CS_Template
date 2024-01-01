@@ -147,3 +147,7 @@ npm run build:main
 ### Version 0.4.0
 
 - Added support for Wombat WAX Wallet
+
+### Version 0.5.0
+
+- Added Multi-Account support (Wharfkit)

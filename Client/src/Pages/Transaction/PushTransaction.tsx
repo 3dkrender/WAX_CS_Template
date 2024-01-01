@@ -2,17 +2,19 @@ import { useState, useEffect } from 'react';
 import { Button, Input } from '@nextui-org/react';
 import { InitTransaction } from '../../services/InitTransaction';
 import { sessionKit } from "../../App";
+import { useNavigate } from 'react-router-dom';
 
 export const PushTransaction = () => {
+  const navigate = useNavigate();
   const [amount, setAmount] = useState(0.0001);
   const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
-    sessionKit.getSessions().then((sessions) => {
-      if (sessions.length) {
-        setUserName(String(sessions[0].actor));
+    sessionKit.restore().then((session) => {
+      if (session) {
+        setUserName(String(session.actor));
       } else {
-        console.log('No sessions found');
+        navigate('/');
       }
     });
   }, [])
