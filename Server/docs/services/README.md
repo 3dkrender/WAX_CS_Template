@@ -1,10 +1,10 @@
 # Services
 
-Los servicios contienen la lógica de la aplicación. Se encargan de realizar todas las operaciones necesarias para dar cumplimiento a las peticiones del cliente.
+Services contain the application logic. They are responsible for performing all the necessary operations to fulfill client requests.
 
-En este ejemplo de plantilla mostramos varios casos de uso de los servicios:
+In this template example, we showcase various use cases of services:
 
-- Acceso a base de datos.
-- Acceso a blockchain.
+- Database access.
+- Blockchain access.
 
-Los servicios se encuentran en la carpeta ``./services``.
+The services are located in the folder `./services`.
