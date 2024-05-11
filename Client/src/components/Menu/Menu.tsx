@@ -80,6 +80,7 @@ export const Menu = () => {
     setSelectedLang(lang);
     store.dispatch(setLang(lang));
     i18next.changeLanguage(lang);
+    localStorage.setItem('lang', lang);
   }
 
   return (

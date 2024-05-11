@@ -4,7 +4,11 @@ import i18n from 'i18next';
 import { initReactI18next } from "react-i18next";
 import store from '../redux/store';
 
-let defaultLang = 'en_US';
+let defaultLang: string = 'en_US';
+
+if (localStorage.getItem('lang')) {
+  defaultLang = localStorage.getItem('lang') || 'en_US';
+}
 
 i18n
   .use(initReactI18next)
