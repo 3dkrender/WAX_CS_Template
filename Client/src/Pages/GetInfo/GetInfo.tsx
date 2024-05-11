@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { ctGetInfo } from "../../Controllers/ctGetInfo";
 import { Spinner } from "@nextui-org/react";
+import { useTranslation } from "react-i18next";
 
 /**
  * Get the info from the blockchain
  * @returns Render the info from the blockchain
  */
 export const GetInfo = () => {
+  const [t] = useTranslation();
+
   const [info, setInfo] = useState<any>(null);
   const [ready, setReady] = useState<boolean>(false);
 
@@ -39,7 +42,7 @@ export const GetInfo = () => {
           :
           <Spinner
             color="warning"
-            label="Waiting for chain info..."
+            label={t('spinner.labelChainInfo')}
             className="mx-auto my-[200px]"
           />
       }

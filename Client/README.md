@@ -151,3 +151,9 @@ npm run build:main
 ### Version 0.5.0
 
 - Added Multi-Account support (Wharfkit)
+
+### Version 0.6.0
+
+- Added redux support
+- Added multi-language support (i18next)
+- Improved icons and styles

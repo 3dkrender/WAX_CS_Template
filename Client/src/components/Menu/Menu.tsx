@@ -1,4 +1,4 @@
-import React, { useEffect, Dispatch, SetStateAction, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Badge, Divider, Image, Spacer, Button,
   Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle,
@@ -9,17 +9,27 @@ import { SerializedSession, Session } from '@wharfkit/session'
 import { DinamicRoutes } from "../../router/routes";
 
 import { sessionKit } from "../../App";
+import { useTranslation } from "react-i18next";
+import { keyLanguages } from "../../i18n";
+import store from "../../redux/store";
+import { setLang } from "../../redux/reducers/config";
+import i18next from "i18next";
+import IconDownOpenMini from "./Icons/IconDownOpenMini";
+import IconRightOpenMini from "./Icons/IconRightOpenMini";
 
 /**
  * Draw the menu
  * @returns Menu component
  */
 export const Menu = () => {
-  // get user data from redux
+  const navigate = useNavigate();
+  const [t] = useTranslation();
+
   const [isMenuOpen, setIsMenuOpen] = React.useState<boolean | undefined>(false);
   const [session, setSession] = useState<Session | undefined>(undefined);
   const [sessions, setSessions] = useState<SerializedSession[]>([]);
-  const navigate = useNavigate();
+  const [selectedLang, setSelectedLang] = useState<string>(i18next.language);
+  const languages = Object.keys(keyLanguages);
 
   useEffect(() => {
     sessionKit.getSessions().then((globalSessions: SerializedSession[] | undefined) => {
@@ -66,6 +76,12 @@ export const Menu = () => {
     setIsMenuOpen(false);
   };
 
+  const handleSelectLanguage = (lang: string) => {
+    setSelectedLang(lang);
+    store.dispatch(setLang(lang));
+    i18next.changeLanguage(lang);
+  }
+
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} className="sm:py-1">
       <NavbarContent>
@@ -86,7 +102,7 @@ export const Menu = () => {
             </Link>
             <Spacer y={1} />
             <div className="hidden sm:flex flex-col">
-              <Badge size='sm' color='warning' content="Alpha" disableOutline>
+              <Badge size='sm' color='warning' content="Alpha">
                 <p className="text-lg font-bold text-white">{import.meta.env.VITE_APP_NAME}</p>
               </Badge>
             </div>
@@ -122,7 +138,7 @@ export const Menu = () => {
                     aria-label={`go to ${route.title}`}
                     className="w-full"
                   >
-                    <span className="text-white">{route.title}</span>
+                    <span className="text-white">{t(`${route.title}`)}</span>
                   </Link>
                 </NavbarItem>
                 <Divider orientation="vertical" />
@@ -131,14 +147,39 @@ export const Menu = () => {
           })
         }
       </NavbarContent>
+      <NavbarContent
+        justify="end"
+        className="hidden sm:flex"
+        key={'language'}
+      >
+        <Dropdown aria-label="language-menu" >
+          <DropdownTrigger aria-label="access-language-menu">
+            <Button variant="bordered" aria-label="Language options menu">
+              <span className="text-white">{keyLanguages[selectedLang]}</span>
+              <IconDownOpenMini />
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="language-menu-options">
+            {
+              languages.map((lang: string, index: number) => {
+                return (
+                  <DropdownItem aria-label="language" key={index} onPress={() => handleSelectLanguage(lang)}>
+                    <div className="flex flex-row items-center">
+                      <span className="text-black">{keyLanguages[lang]}</span>
+                    </div>
+                  </DropdownItem>
+                )
+              })
+            }
+          </DropdownMenu>
+        </Dropdown>
+      </NavbarContent>
       <NavbarContent justify="end" key={'user'} >
         {
           !session &&
           <Button onPress={login} className="sm:text-xs py-1 sm:py-2">
             Login
-            <svg className="w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13" />
-            </svg>
+            <IconDownOpenMini />
           </Button>
         }
         {
@@ -147,9 +188,7 @@ export const Menu = () => {
             <DropdownTrigger aria-label="access-user-menu">
               <Button variant="bordered" aria-label="User options menu">
                 <span className="text-white">{String(session.actor)}</span>
-                <svg className="w-[15px] h-[15px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 8">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1" />
-                </svg>
+                <IconRightOpenMini />
               </Button>
             </DropdownTrigger>
             <DropdownMenu aria-label="user-menu-options">
@@ -158,7 +197,7 @@ export const Menu = () => {
                 title=''
                 showDivider
               >
-                <DropdownItem aria-label="user-tokens" onPress={() => navigate('/user-tokens')} className="text-black " >View tokens</DropdownItem>
+                <DropdownItem aria-label="user-tokens" onPress={() => navigate('/user-tokens')} className="text-black " >{t('components.navbar.viewTokens')}</DropdownItem>
               </DropdownSection>
               <DropdownSection
                 aria-label="user-menu-sessions-section"
@@ -184,10 +223,10 @@ export const Menu = () => {
                 showDivider
               >
                 <DropdownItem aria-label="options" onPress={login}>
-                  Add new session
+                  {t('components.navbar.addNewSession')}
                 </DropdownItem>
               </DropdownSection>
-              <DropdownItem aria-label="logout" onPress={logout} className="text-danger" >Log out</DropdownItem>
+              <DropdownItem aria-label="logout" onPress={logout} className="text-danger" >{t('components.navbar.logOut')}</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         }
