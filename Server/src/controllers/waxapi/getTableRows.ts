@@ -1,10 +1,8 @@
-import { rpcWAXService } from "../../services/rpcWAXService";
+import { apiWAXService } from "../../services/apiWAXService";
 
 export const getTableRows = async (req: any, res: any) => {
     try {
-        const data = await rpcWAXService.getTableRows(req.params.code, req.params.scope, req.params.table);
-        console.log(data);
-        
+        const data = await apiWAXService.getTableRows(req.params.code, req.params.scope, req.params.table);
         res.status(200).json(data);
     }
     catch (error) {

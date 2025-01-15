@@ -1,4 +1,4 @@
-import { rpcWAXService } from "../../services/rpcWAXService"; 
+import { apiWAXService } from "../../services/apiWAXService";
 
 /**
  * getInfo controller
@@ -7,7 +7,7 @@ import { rpcWAXService } from "../../services/rpcWAXService";
  */
 export const getInfo = async (req: any, res: any) => {
   try {
-    const info = await rpcWAXService.getInfo();
+    const info = await apiWAXService.getInfo();
     res.status(200).json({
       info,
     });

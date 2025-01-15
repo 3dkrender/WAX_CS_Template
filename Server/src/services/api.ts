@@ -18,6 +18,6 @@ const args = {
 }
 
 export const sessionWAX = new Session(args);
-export const apiWAX = new APIClient({
-  url: process.env.RPC as string,
-});
+// export const apiWAX = new APIClient({
+//   url: process.env.RPC as string,
+// });

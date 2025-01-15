@@ -1,5 +1,4 @@
 import { en_US, es_ES } from '../i18n';
-
 import i18n from 'i18next';
 import { initReactI18next } from "react-i18next";
 import store from '../redux/store';

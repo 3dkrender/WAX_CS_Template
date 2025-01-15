@@ -83,7 +83,13 @@ npm run start
 
 ## Versioning
 
+### v0.3.0
+
+- Improvements in reading blockchain tables through axios calls to Hiperion API
+
 ### v0.2.0
 
 - Updated to Wharfkit for session management and authentication (https://wharfkit.com/). Enfjs is now deprecated.
 - Added sample function to push transactions to the blockchain
+
+
