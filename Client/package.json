@@ -23,7 +23,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@nextui-org/react": "^2.0.0",
+    "@heroui/react": "2.6.13",
     "@reduxjs/toolkit": "^2.2.4",
     "@types/lodash": "^4.14.195",
     "@wharfkit/session": "^1.0.0",

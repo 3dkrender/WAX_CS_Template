@@ -1,4 +1,4 @@
-import { NextUIProvider } from "@nextui-org/react";
+import { HeroUIProvider } from "@heroui/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
@@ -13,12 +13,12 @@ import store from "./redux/store";
  */
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <NextUIProvider>
+    <HeroUIProvider>
       <Provider store={store}>
         <main className="dark text-foreground">
           <App />
         </main>
       </Provider>
-    </NextUIProvider>
+    </HeroUIProvider>
   </React.StrictMode>
 );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { TTokens } from "../../types/TTokens";
-import { Card, CardBody, Spinner, Tooltip } from "@nextui-org/react";
+import { Card, CardBody, Spinner, Tooltip } from "@heroui/react";
 import { ctGetUserTokens } from "../../Controllers/ctGetUserTokens";
 import { sessionKit } from "../../App";
 import { useNavigate } from "react-router-dom";

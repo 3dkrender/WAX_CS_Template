@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Input } from '@nextui-org/react';
+import { Button, Input } from "@heroui/react";
 import { InitTransaction } from '../../services/InitTransaction';
 import { sessionKit } from "../../App";
 import { useNavigate } from 'react-router-dom';

@@ -3,7 +3,7 @@ import {
   Badge, Divider, Image, Spacer, Button,
   Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle,
   DropdownItem, DropdownMenu, DropdownTrigger, Dropdown, DropdownSection
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { SerializedSession, Session } from '@wharfkit/session'
 import { DinamicRoutes } from "../../router/routes";
@@ -193,12 +193,12 @@ export const Menu = () => {
               </Button>
             </DropdownTrigger>
             <DropdownMenu aria-label="user-menu-options">
-            <DropdownSection
+              <DropdownSection
                 aria-label="user-menu-tools-section"
                 title=''
                 showDivider
               >
-                <DropdownItem aria-label="user-tokens" onPress={() => navigate('/user-tokens')} className="text-black " >{t('components.navbar.viewTokens')}</DropdownItem>
+                <DropdownItem key={"user-tokens"} aria-label="user-tokens" onPress={() => navigate('/user-tokens')} className="text-black " >{t('components.navbar.viewTokens')}</DropdownItem>
               </DropdownSection>
               <DropdownSection
                 aria-label="user-menu-sessions-section"
@@ -223,11 +223,11 @@ export const Menu = () => {
                 title=''
                 showDivider
               >
-                <DropdownItem aria-label="options" onPress={login}>
+                <DropdownItem key={"options"} aria-label="options" onPress={login}>
                   {t('components.navbar.addNewSession')}
                 </DropdownItem>
               </DropdownSection>
-              <DropdownItem aria-label="logout" onPress={logout} className="text-danger" >{t('components.navbar.logOut')}</DropdownItem>
+              <DropdownItem key={"logout"} aria-label="logout" onPress={logout} className="text-danger" >{t('components.navbar.logOut')}</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         }

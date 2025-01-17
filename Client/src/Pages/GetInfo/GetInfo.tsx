@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ctGetInfo } from "../../Controllers/ctGetInfo";
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@heroui/react";
 import { useTranslation } from "react-i18next";
 
 /**
