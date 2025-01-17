@@ -157,3 +157,7 @@ npm run build:main
 - Added redux support
 - Added multi-language support (i18next)
 - Improved icons and styles
+
+### Version 0.7.0
+
+- Migration from NextUI to HeroUI
