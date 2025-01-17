@@ -38,7 +38,7 @@ VITE_EXPLORER= # WAX explorer URL (if you want to show transaction links)
 
 ## React UI
 
-This template uses the [React NextUI V2](https://https://nextui.org/) library for the UI. Feel free to use any other UI library.
+This template uses the [React HeroUI (Previously called NextUI)](https://www.heroui.com/) library for the UI. Feel free to use any other UI library.
 
 ## Usage
 
