@@ -1,9 +1,6 @@
 import { combineReducers } from "redux";
-import user from "./userReducer";
+import config from "./config";
 
-/**
- * Combine all the reducers of the app
- */
 export const rootReducer = combineReducers({
-  user
+  config  
 });

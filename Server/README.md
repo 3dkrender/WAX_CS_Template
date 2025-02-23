@@ -8,17 +8,17 @@ Create a backend server for a WAX blockchain dApp using Node, Express, and Mongo
 
 Created by 3DK Render
 
-## Installation
+## Installation (Server)
 
 Clone the repo and install dependencies
-  
-  ```bash
-  git clone https://github.com/3dkrender/WAX-NST.git
-  cd WAX-NST
-  npm install
-  ```
 
-This template works together with the [WAX-ReactClientTemplate](https://github.com/3dkrender/WAX-RCT). You must clone both repos and install dependencies in each one.
+```bash
+git clone https://github.com/3dkrender/WAX_CS_Template.git
+cd WAX_CS_Template/Server
+npm install
+```
+
+This template works together with the [WAX-ReactClientTemplate](https://github.com/3dkrender/WAX_CS_Template/tree/main/Client). You must clone both repos and install dependencies in each one.
 
 - Client and server must be running at the same time.
 - Client and server must be running on different ports.
@@ -26,11 +26,11 @@ This template works together with the [WAX-ReactClientTemplate](https://github.c
 
 ## Environment Variables
 
-Create a ```.env-cmdrc.json``` file in the root directory and add this json object with your own values:
+Create a `.env-cmdrc.json` file in the root directory and add this json object with your own values:
 
-*Note: WAXKEY is only required if you are using the WAX blockchain to put transactions on the blockchain. If you are only using the server to read blokchain and/or store data in a database, you can leave it out.*
+_Note: WAXKEY is only required if you are using the WAX blockchain to put transactions on the blockchain. If you are only using the server to read blokchain and/or store data in a database, you can leave it out._
 
-*Note: This template is valid for both the WAX mainnet and testnet. You can add more environments if you want to use other Antelope chains.*
+_Note: This template is valid for both the WAX mainnet and testnet. You can add more environments if you want to use other Antelope chains._
 
 ```json
 {
@@ -39,6 +39,7 @@ Create a ```.env-cmdrc.json``` file in the root directory and add this json obje
     "CHAIN_ID": "1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4",
     "RPC": "http://tapiwax.3dkrender.com",
     "WAXKEY": "PVT_K1_PKAAAAAAAAAAAAAAAAAAAAAA",
+    "ACCOUNT": "accountname",
     "PORT": 3000,
     "MONGO_DBNAME": "dbname",
     "MONGO_URI": "mongodb://localhost:9857/"
@@ -48,14 +49,15 @@ Create a ```.env-cmdrc.json``` file in the root directory and add this json obje
     "CHAIN_ID": "106a8d3c7c2b8ce8a8b4217d6e2df6e7888ec5f6d9b6c4d3a1a3f2b5bea6c2aa",
     "RPC": "https://apiwax.3dkrender.com",
     "WAXKEY": "PVT_K1_PKAAAAAAAAAAAAAAAAAAAAAA",
-    "PORT": 3000,
+    "ACCOUNT": "accountname",
+    "PORT": 3005,
     "MONGO_DBNAME": "dbname",
     "MONGO_URI": "mongodb://localhost:9857/"
-  }  
+  }
 }
 ```
 
-*The WAXKEY in the example is a fake key. You must use your own key.*
+_The WAXKEY in the example is a fake key. You must use your own key._
 
 # IMPORTANT
 
@@ -78,5 +80,16 @@ npm run dev
 ```bash
 npm run start
 ```
+
+## Versioning
+
+### v0.3.0
+
+- Improvements in reading blockchain tables through axios calls to Hiperion API
+
+### v0.2.0
+
+- Updated to Wharfkit for session management and authentication (https://wharfkit.com/). Enfjs is now deprecated.
+- Added sample function to push transactions to the blockchain
 
 

@@ -2,6 +2,6 @@
 
 ## Table of Contents
 
-- Routes and Middlewares: [docs/routes/README.md](docs/routes/README.md)
-- Controllers: [docs/controllers/README.md](docs/controllers/README.md)
-- Services: [docs/services/README.md](docs/services/README.md)
+- Routes and Middlewares: [routes/README.md](routes/README.md)
+- Controllers: [controllers/README.md](controllers/README.md)
+- Services: [services/README.md](services/README.md)

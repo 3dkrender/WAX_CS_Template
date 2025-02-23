@@ -2,21 +2,21 @@
 # React Client Template (for WAX blockchain dApps)
 
 ## Description
-Create a frontend client for WAX blockchain dApp using React and redux.
+Create a frontend client for WAX blockchain dApp using Vite, React and NextUI.
 
 Created by 3DK Render
 
-## Installation
+## Installation (Client)
 
 Clone the repo and install dependencies
   
   ```bash
-  git clone https://github.com/3dkrender/WAX-RCT.git
-  cd WAX-RCT
-  npm install
+  git clone https://github.com/3dkrender/WAX_CS_Template.git
+  cd WAX_CS_Template/Client
+  npi install
   ```
 
-This template works together with the [WAX-NodeServerTemplate](https://github.com/3dkrender/WAX-NST) template. You must have the server running in order to use this template.
+This template works together with the [WAX-NodeServerTemplate](https://github.com/3dkrender/WAX_CS_Template/tree/main/Server) template. You must have the server running in order to use this template.
 
 - Client and server must be running at the same time.
 - Client and server must be running in different ports.
@@ -36,19 +36,19 @@ VITE_EXPLORER= # WAX explorer URL (if you want to show transaction links)
 
 *See some samples in the env folder*
 
-You can uncomment the env line in ```.gitignore``` to avoid pushing your .env files to your repository. It is included in this repo for learning purposes.
-
 ## React UI
 
-This template uses the [React NextUI](https://https://nextui.org/) library for the UI. Feel free to use any other UI library.
+This template uses the [React HeroUI (Previously called NextUI)](https://www.heroui.com/) library for the UI. Feel free to use any other UI library.
 
 ## Usage
 
+## Session Management
+
+The client uses the WharfKit library for session management. The session is stored in the browser's local storage. The session is created when the user logs in and destroyed when the user logs out.
+
 ## Client Connection
 
-The client uses the ual-reactjs-renderer library to connect to the WAX blockchain. This library handles the blockchain connection and provides user account data.
-
-The user account data, as well as authentication status, are stored in the Redux store. The `useSelector` hook from react-redux is used to access this data.
+The client connects to the server using the axios library. The server URL is specified in the environment variables.
 
 ## Landing Page and Login
 
@@ -72,17 +72,34 @@ The client utilizes the axios library to make server requests from within the co
 
 ### Example Server Request
 
+From component: 
+
 ```javascript
-useEffect(() => {
-  axios
-    .get(import.meta.env.VITE_SERVER + "api/getinfo")
-    .then((res: any) => {
-      setData(res.data);
-    })
-    .catch((err: any) => {
-      console.log(err);
-    });
-}, []);
+const [info, setInfo] = useState(null);
+  useEffect(() => {
+    ctGetInfo()
+      .then((res: any) => {
+        if (res) {
+          setInfo(res);
+        }
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  }, [])
+```
+
+Controller (ctGetInfo):
+
+```javascript
+export const ctGetInfo = async () => {
+  try {
+    const res = await axios.get(import.meta.env.VITE_SERVER + "api/getinfo");
+    return res.data['info'];
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 ```
 
 This example demonstrates a server request using axios within the `useEffect` hook. It fetches data from the specified API endpoint and stores the response data in the component's state variable.
@@ -116,3 +133,31 @@ npm run build:testnet
 # For mainnet
 npm run build:main
 ```
+
+## Version: 0.2.0
+- NextUI updated to v2.0.0 (All UI refactored)
+  - Now includes TailwindCSS
+- Improved server calls
+
+## Version: 0.3.0
+- Updated to manage sessions through [Wharf](https://wharfkit.com/)
+- Added function to push transactions to the blockchain
+- Updated React-Router to V6 (new routes syntax)
+
+### Version 0.4.0
+
+- Added support for Wombat WAX Wallet
+
+### Version 0.5.0
+
+- Added Multi-Account support (Wharfkit)
+
+### Version 0.6.0
+
+- Added redux support
+- Added multi-language support (i18next)
+- Improved icons and styles
+
+### Version 0.7.0
+
+- Migration from NextUI to HeroUI

@@ -1,25 +1,19 @@
-import { Container } from "@nextui-org/react";
+import { Outlet } from "react-router-dom";
+import { Menu } from "../../components/Menu/Menu";
+import Footer from "../../components/Footer/Footer";
 
 /**
- * Sample landing page
  * @returns Render the landing page
  */
 export const Landing = () => {
+ 
   return (
-    <Container
-      justify='center'
-      fluid
-    >
-      <Container
-        justify='space-between'
-        display='flex'
-        css={{
-          textAlign: "center",
-          width: "95%",
-        }}
-      >
-        <h1>My APP</h1>
-      </Container>
-    </Container>
-  );
+    <div className="flex flex-col min-h-screen">
+      <Menu />
+      <main className="flex-grow max-w-7xl m-auto" >
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  )
 };

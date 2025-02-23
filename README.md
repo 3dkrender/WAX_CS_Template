@@ -1,5 +1,5 @@
 ![3DK Logo](https://3dkrender.com/wp-content/uploads/2021/05/3DK_LOGO_400x120.png)
-# Client Server Template (for WAX blockchain dApps)
+# Client Server Template (for WAX blockchain developers)
 
 ## Introduction
 
@@ -30,7 +30,7 @@ Let's build a decentralized future on WAX Blockchain!
 ## Description
 
 - Server side: Create a backend server for a WAX blockchain dApp using Node, Express, and MongoDB.
-- Client side: Create a frontend client for WAX blockchain dApp using React and redux.
+- Client side: Create a frontend client for WAX blockchain dApp using Vite, React and NextUI.
 
 ## Installation
 
@@ -65,11 +65,12 @@ npm install
 
 See documentation for each part of this project to learn how to use it.
 
+
 ## Disclaimer
 
 This template is provided as is, without any warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement.
 
-The template is for educational purposes and is not an out-of-the-box tool. It needs to be customised to meet the desired requirements in each case.
+The template is for educational purposes and **is not an out-of-the-box tool**. It needs to be customised to meet the desired requirements in each case.
 
 For this reason it is necessary for the developer to have knowledge in Typescript and, specifically, in the use of services such as:
 
@@ -77,7 +78,6 @@ For this reason it is necessary for the developer to have knowledge in Typescrip
 - Express
 - MongoDB
 - React
-- Redux
 
 ## License
 
@@ -85,5 +85,6 @@ For this reason it is necessary for the developer to have knowledge in Typescrip
 
 ## Author
 
-- [@3dkrender](https://www.github.com/3dkrender)
+- [Github](https://www.github.com/3dkrender)
 - [Discord](https://discord.gg/3dkrender)
+

@@ -1,5 +1,5 @@
-# IMPORTANT! Uncomment the following line in your .gitignore file
-# env 
+# Configuration files
+env 
 
 # Logs
 logs
@@ -101,3 +101,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Yarn
+yarn.lock
