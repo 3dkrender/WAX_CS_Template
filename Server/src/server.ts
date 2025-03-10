@@ -3,6 +3,7 @@ import { logger } from "./config/logger";
 import morgan from "morgan";
 import CFonts from "cfonts";
 import cors from "cors";
+import { applySecurityMiddleware } from "./config/security";
 
 /**
  * Import Routes
@@ -23,8 +24,19 @@ process.on("uncaughtException", function (err) {
 /**
  * Middlewares
  */
-app.use(cors());
-app.use(express.json());
+// Apply security measures
+applySecurityMiddleware(app);
+
+// Configure CORS with restrictive options
+app.use(cors({
+  origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  maxAge: 86400 // 24 hours
+}));
+
+app.use(express.json({ limit: '10kb' })); // Limit body size
 app.use(morgan('combined'));
 
 /**
