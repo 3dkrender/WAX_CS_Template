@@ -1,6 +1,6 @@
 {
   "name": "wax-server-template",
-  "version": "0.4.0",
+  "version": "0.10.0",
   "description": "Node Server Template for WAX dApps",
   "author": {
     "name": "Marcos DK",
@@ -36,6 +36,7 @@
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/morgan": "^1.9.4",
+    "@types/node-cache": "^4.2.5",
     "@wharfkit/antelope": "^1.0.2",
     "@wharfkit/session": "^1.1.1",
     "@wharfkit/wallet-plugin-privatekey": "^1.1.0",
@@ -51,6 +52,7 @@
     "hpp": "^0.2.3",
     "mongodb": "^5.6.0",
     "morgan": "^1.10.0",
+    "node-cache": "^5.1.2",
     "winston": "^3.9.0",
     "zod": "^3.24.2"
   }
