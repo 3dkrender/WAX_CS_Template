@@ -46,6 +46,7 @@ As WAX guilds, we are committed to facilitating adoption, and at 3DK Render, we 
 - Internationalization support (i18next)
 - Modern UI with TailwindCSS
 - TypeScript support
+- Comprehensive testing setup with Vitest and React Testing Library
 
 ### Server Features
 - Node.js with Express
@@ -141,6 +142,57 @@ npm run start:mlocal    # Run mainnet in local mode
 npm run start:main      # Run mainnet in production mode
 npm run build:mainnet   # Build for mainnet
 npm run build:testnet   # Build for testnet
+npm run test           # Run tests in watch mode
+npm run test:ui        # Run tests with UI
+npm run test:coverage  # Run tests with coverage report
+npm run test:watch     # Run tests in watch mode
+```
+
+## Testing
+
+The client application includes a comprehensive testing setup using Vitest and React Testing Library. This ensures the reliability and maintainability of the codebase.
+
+### Testing Features
+- Unit testing with Vitest
+- Component testing with React Testing Library
+- DOM manipulation testing
+- Environment variable mocking
+- Component structure validation
+- Asynchronous testing support
+- Test coverage reporting
+
+### Running Tests
+You can run tests using the following commands:
+```bash
+npm test           # Run tests in watch mode
+npm run test:ui    # Run tests with UI
+npm run test:coverage # Generate coverage report
+```
+
+### Test Structure
+```
+Client/
+├── src/
+│   ├── test/              # Test files
+│   │   ├── setup.ts      # Test setup configuration
+│   │   ├── App.test.tsx  # App component tests
+│   │   └── *.test.tsx    # Component tests
+```
+
+### Writing Tests
+Tests are written using Vitest and React Testing Library. Here's a basic example:
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { YourComponent } from './YourComponent';
+
+describe('YourComponent', () => {
+  it('renders without crashing', () => {
+    const { container } = render(<YourComponent />);
+    expect(container).toBeTruthy();
+  });
+});
 ```
 
 ### Server Setup
@@ -197,6 +249,11 @@ For detailed security documentation, see [Security Guide](./docs/security.md).
 ## Versioning
 
 ### Client Versions
+- v0.9.0: Added comprehensive testing setup
+  - Implemented Vitest and React Testing Library
+  - Added component and unit testing capabilities
+  - Added test coverage reporting
+  - Added testing documentation
 - v0.8.0: Enhanced security measures and unified documentation
   - Implemented comprehensive security features
   - Added detailed security documentation
