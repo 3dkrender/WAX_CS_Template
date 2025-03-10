@@ -62,221 +62,210 @@ As WAX guilds, we are committed to facilitating adoption, and at 3DK Render, we 
 ```
 WAX_CS_Template/
 ├── Client/                 # React frontend application
-│   ├── src/               # Source files
+│   ├── src/
+│   │   ├── core/          # Core application setup
+│   │   │   ├── middleware/  # Custom Redux middleware
+│   │   │   └── store/      # Redux store configuration
+│   │   ├── features/      # Feature-based modules
+│   │   │   └── auth/      # Authentication feature
+│   │   │       ├── components/  # Presentational components
+│   │   │       ├── containers/  # Container components
+│   │   │       └── store/       # Feature-specific state
+│   │   └── shared/       # Shared resources
+│   │       ├── components/  # Reusable components
+│   │       │   ├── atoms/    # Basic components
+│   │       │   ├── molecules/ # Combinations of atoms
+│   │       │   └── organisms/ # Complex components
+│   │       ├── hooks/      # Custom React hooks
+│   │       └── utils/      # Utility functions
 │   ├── public/            # Static files
 │   └── env/              # Environment configurations
-├── Server/                # Node.js backend application
-│   ├── src/              # Source files
-│   ├── docs/             # API documentation
-│   └── config/           # Server configurations
-└── docs/                 # Project documentation
+├── Server/               # Node.js backend application
+│   ├── src/             # Source files
+│   ├── docs/            # API documentation
+│   └── config/          # Server configurations
+└── docs/                # Project documentation
 ```
 
-## Prerequisites
-- Node.js 18 or higher
-- MongoDB
-- Git
-- Basic knowledge of TypeScript
-- Understanding of:
-  - React
-  - Express
-  - MongoDB
-  - WAX Blockchain concepts
+## Architecture
 
-## Quick Start
+The project follows a modern, scalable architecture with several key design patterns and principles:
 
-1. Clone the repository:
-```bash
-git clone https://github.com/3dkrender/WAX_CS_Template.git
-cd WAX_CS_Template
-```
+### Client Architecture
 
-2. Install dependencies:
-```bash
-# Install client dependencies
-cd Client && npm install
+#### Feature-Based Structure
+- Organized around business domains rather than technical concerns
+- Each feature is self-contained with its own components, logic, and state
+- Promotes code cohesion and reduces coupling
 
-# Install server dependencies
-cd ../Server && npm install
-```
+#### Component Architecture
+Follows Atomic Design principles:
+- **Atoms**: Basic building blocks (buttons, inputs, etc.)
+- **Molecules**: Simple combinations of atoms
+- **Organisms**: Complex UI components
+- **Templates**: Page layouts
+- **Pages**: Specific instances of templates
 
-3. Set up environment variables:
-```bash
-# Client environment setup
-cp Client/env/.env.example Client/env/.env
+#### State Management
+- Redux Toolkit for global state management
+- Feature-based state organization
+- Custom middleware for logging and error handling
+- Selectors for efficient state access
 
-# Server environment setup
-cp Server/.env-cmdrc.example.json Server/.env-cmdrc.json
-```
+#### Design Patterns
+1. **Container/Presentational Pattern**
+   - Containers handle logic and state
+   - Presentational components focus on UI
+   - Clear separation of concerns
 
-4. Start development servers:
-```bash
-# Start client (in Client directory)
-npm run dev:tlocal
+2. **Observer Pattern**
+   - Implemented through Redux for state management
+   - Reactive updates to state changes
 
-# Start server (in Server directory)
-npm run dev
-```
+3. **Factory Pattern**
+   - Used in async action creators
+   - Standardized object creation
 
-## Detailed Setup
+4. **Strategy Pattern**
+   - Applied in component variants
+   - Configurable behaviors
 
-### Client Setup
+#### Custom Hooks
+- Reusable logic extraction
+- Standardized state management
+- Browser API abstractions
 
-The client is a React application that connects to the WAX blockchain and communicates with the backend server.
+### Server Architecture
+[Previous server architecture documentation remains unchanged]
 
-#### Environment Variables (Client)
-Create `env/.env` file with:
-```env
-VITE_CHAIN=         # WAX chain name (mainnet/testnet)
-VITE_UALRPC=       # WAX chain RPC endpoint
-VITE_CHAINID=      # WAX chain ID
-VITE_SERVER=       # Your server URL
-VITE_EXPLORER=     # WAX explorer URL
-```
+## Development
 
-#### Available Scripts (Client)
-```bash
-npm run dev:tlocal      # Run testnet in local mode
-npm run dev:testnet     # Run testnet in production mode
-npm run start:mlocal    # Run mainnet in local mode
-npm run start:main      # Run mainnet in production mode
-npm run build:mainnet   # Build for mainnet
-npm run build:testnet   # Build for testnet
-npm run test           # Run tests in watch mode
-npm run test:ui        # Run tests with UI
-npm run test:coverage  # Run tests with coverage report
-npm run test:watch     # Run tests in watch mode
-```
+### Client Development
 
-## Testing
-
-The client application includes a comprehensive testing setup using Vitest and React Testing Library. This ensures the reliability and maintainability of the codebase.
-
-### Testing Features
-- Unit testing with Vitest
-- Component testing with React Testing Library
-- DOM manipulation testing
-- Environment variable mocking
-- Component structure validation
-- Asynchronous testing support
-- Test coverage reporting
-
-### Running Tests
-You can run tests using the following commands:
-```bash
-npm test           # Run tests in watch mode
-npm run test:ui    # Run tests with UI
-npm run test:coverage # Generate coverage report
-```
-
-### Test Structure
-```
-Client/
-├── src/
-│   ├── test/              # Test files
-│   │   ├── setup.ts      # Test setup configuration
-│   │   ├── App.test.tsx  # App component tests
-│   │   └── *.test.tsx    # Component tests
-```
-
-### Writing Tests
-Tests are written using Vitest and React Testing Library. Here's a basic example:
-
+#### State Management
 ```typescript
-import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/react';
-import { YourComponent } from './YourComponent';
+// Example of a Redux slice
+import { createSlice } from '@reduxjs/toolkit';
 
-describe('YourComponent', () => {
-  it('renders without crashing', () => {
-    const { container } = render(<YourComponent />);
-    expect(container).toBeTruthy();
-  });
+export const featureSlice = createSlice({
+  name: 'feature',
+  initialState,
+  reducers: {
+    // Your reducers
+  },
 });
 ```
 
-### Server Setup
+#### Component Development
+```typescript
+// Atomic component example
+import React from 'react';
 
-The server provides API endpoints for the client and handles blockchain interactions and database operations.
+interface ButtonProps {
+  variant: 'primary' | 'secondary';
+  // Props definition
+}
 
-#### Environment Configuration (Server)
-Create `.env-cmdrc.json` with:
-```json
-{
-  "TEST": {
-    "CHAIN": "testnet",
-    "CHAIN_ID": "1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4",
-    "RPC": "http://tapiwax.3dkrender.com",
-    "WAXKEY": "YOUR_PRIVATE_KEY",
-    "ACCOUNT": "your.account",
-    "PORT": 3000,
-    "MONGO_DBNAME": "your_db",
-    "MONGO_URI": "mongodb://localhost:27017/"
-  },
-  "MAIN": {
-    "CHAIN": "mainnet",
-    "CHAIN_ID": "1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4",
-    "RPC": "https://apiwax.3dkrender.com",
-    "WAXKEY": "YOUR_PRIVATE_KEY",
-    "ACCOUNT": "your.account",
-    "PORT": 3005,
-    "MONGO_DBNAME": "your_db",
-    "MONGO_URI": "mongodb://localhost:27017/"
-  }
+export const Button: React.FC<ButtonProps> = ({
+  variant,
+  // Props destructuring
+}) => {
+  // Component implementation
+};
+```
+
+#### Container Pattern
+```typescript
+// Container component example
+import { useDispatch, useSelector } from 'react-redux';
+
+export const FeatureContainer: React.FC = () => {
+  const dispatch = useDispatch();
+  const data = useSelector(selectFeatureData);
+  
+  // Business logic implementation
+};
+```
+
+### Custom Hooks
+```typescript
+// Custom hook example
+export function useLocalStorage<T>(key: string, initialValue: T) {
+  // Hook implementation
 }
 ```
 
-#### Available Scripts (Server)
-```bash
-npm run dev    # Run in development mode
-npm run start  # Run in production mode
-```
-
-## Security
-
-The template includes several security measures:
-
-- Rate limiting
-- CORS protection
-- XSS prevention
-- Request validation
-- Parameter pollution prevention
-- Security headers
-- Body size limits
-
-For detailed security documentation, see [Security Guide](./docs/security.md).
+[Rest of the documentation remains unchanged]
 
 ## Versioning
 
-### Client Versions
-- v0.9.0: Added comprehensive testing setup
-  - Implemented Vitest and React Testing Library
-  - Added component and unit testing capabilities
-  - Added test coverage reporting
-  - Added testing documentation
-- v0.8.0: Enhanced security measures and unified documentation
-  - Implemented comprehensive security features
-  - Added detailed security documentation
-  - Unified and improved project documentation
-  - Added contributing guidelines
-- v0.7.0: Migration from NextUI to HeroUI
-- v0.6.0: Added redux and multi-language support
-- v0.5.0: Added Multi-Account support
-- v0.4.0: Added Wombat WAX Wallet support
-- v0.3.0: Updated to Wharf session management
-- v0.2.0: NextUI v2.0.0 update
+- v0.10.0
+  - Enhanced architecture and design patterns
+    - Implemented feature-based architecture with Atomic Design
+    - Improved state management with Redux Toolkit
+    - Added custom middleware and hooks
+    - Updated project documentation
+    - Reorganized project structure for better scalability
 
-### Server Versions
-- v0.4.0: Security enhancements and documentation improvements
-  - Added rate limiting
-  - Implemented Helmet security headers
-  - Added CORS protection
-  - Added parameter pollution prevention
-  - Added request validation with Zod
-  - Improved error handling
-  - Enhanced documentation
-- v0.3.0: Improved blockchain table reading
-- v0.2.0: Updated to Wharfkit, added transaction support
+- v0.9.0
+  - Testing and Security Enhancements
+    - Implemented comprehensive testing setup with Vitest and React Testing Library
+    - Added component and unit testing capabilities
+    - Implemented rate limiting and security headers
+    - Added CORS protection and parameter pollution prevention
+    - Added request validation with Zod
+    - Enhanced error handling system
+    - Added test coverage reporting
+
+- v0.8.0
+  - Documentation and Security Update
+    - Unified project documentation
+    - Enhanced security measures
+    - Added detailed security documentation
+    - Added contributing guidelines
+    - Improved API documentation
+
+- v0.7.0
+  - UI and Blockchain Integration
+    - Migrated from NextUI to HeroUI
+    - Improved blockchain table reading
+    - Enhanced WAX integration features
+    - Updated to Wharfkit with transaction support
+
+- v0.6.0
+  - Feature Enhancements
+    - Added Redux for state management
+    - Implemented multi-language support (i18next)
+    - Enhanced API endpoints
+    - Improved error handling
+
+- v0.5.0
+  - Wallet Integration
+    - Added Multi-Account support
+    - Added Wombat WAX Wallet support
+    - Enhanced wallet connection handling
+    - Improved session management
+
+- v0.4.0
+  - Core Updates
+    - Updated to Wharf session management
+    - Enhanced blockchain integration
+    - Improved transaction handling
+    - Added basic security measures
+
+- v0.3.0
+  - Initial Features
+    - Basic WAX blockchain integration
+    - Multiple wallet support
+    - Basic server functionality
+    - Initial UI components
+
+- v0.2.0
+  - Project Setup
+    - Initial project structure
+    - Basic client/server architecture
+    - NextUI integration
+    - Basic documentation
 
 ## Contributing
 

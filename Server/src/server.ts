@@ -4,6 +4,8 @@ import morgan from "morgan";
 import CFonts from "cfonts";
 import cors from "cors";
 import { applySecurityMiddleware, SecurityConfig } from "./config/security";
+import helmet from 'helmet';
+import waxRouter from './presentation/http/routes/wax.routes';
 
 /**
  * Import Routes
@@ -14,6 +16,7 @@ import { rtGetMongoApi } from "./routes/rtmongoapi";
 export interface ServerOptions {
   enableMongo?: boolean;
   security?: SecurityConfig;
+  enableSecurity?: boolean;
 }
 
 export async function createServer(options: ServerOptions = {}) {
@@ -29,8 +32,14 @@ export async function createServer(options: ServerOptions = {}) {
   /**
    * Middlewares
    */
-  // Body parsing middleware first
-  app.use(express.json({ limit: '10kb' })); // Limit body size
+  // Basic security middleware
+  if (options.enableSecurity !== false) {
+    app.use(helmet());
+  }
+
+  // JSON and URL-encoded parsing middleware
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
 
   // Configure CORS with restrictive options
   app.use(cors({
@@ -45,7 +54,7 @@ export async function createServer(options: ServerOptions = {}) {
   applySecurityMiddleware(app, options.security);
 
   // Logging middleware
-  app.use(morgan('combined'));
+  app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
 
   /**
    * Health Check Endpoint
@@ -59,10 +68,10 @@ export async function createServer(options: ServerOptions = {}) {
     });
 
   /**
-   * Middleware Routes
+   * API Routes
    */
   // WAX API: http://<host>:<port>/api/<method>
-  app.use("/api", rtGetWAXApi);
+  app.use("/api", waxRouter);
   
   // MongoDB API: http://<host>:<port>/db/<method>
   if (options.enableMongo) {
@@ -99,6 +108,18 @@ export async function createServer(options: ServerOptions = {}) {
       data: null,
     });
     next();
+  });
+
+  // Startup banner
+  CFonts.say('WAX API', {
+    font: 'block',
+    align: 'left',
+    colors: ['system'],
+    background: 'transparent',
+    letterSpacing: 1,
+    lineHeight: 1,
+    space: true,
+    maxLength: '0',
   });
 
   return app;
